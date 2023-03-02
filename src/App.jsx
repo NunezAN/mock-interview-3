@@ -1,28 +1,22 @@
+import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
 function App() {
-  const [input, setInput] = useState("");
-  const [displayedInput, setDisplayedInput] = useState("");
+  const [results, setResults] = useState({});
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setDisplayedInput(input);
-    }, 1000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [input]);
+    const fetchResults = async () => {
+      const results = await axios.get("https://www.boredapi.com/api/activity");
 
+      setResults(results.data);
+      // console.log(results.data);
+    };
+    fetchResults();
+  }, []);
   return (
     <div className="bg-black w-screen h-screen text-white flex flex-col">
       <span className="text-white text-4xl text-center mt-12">
-        {displayedInput}
+        {results.activity}
       </span>
-      <input
-        className="bg-inherit text-white text-2xl p-4 m-auto border-2 border-white"
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.currentTarget.value)}
-      />
     </div>
   );
 }
