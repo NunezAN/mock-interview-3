@@ -27,9 +27,9 @@ function App() {
           <option key={i}>{elem.name}</option>
         ))}
       </select>
-      <div className="p-12 flex flex-wrap items-center justify-between">
+      <div className="p-12 grid grid-cols-3">
         {states.map((elem, index) => (
-          <div key={index} className="w-48 p-2">
+          <div key={index} className="text-2xl w-[1/3] p-2">
             <input
               type="checkbox"
               checked={elem.checked}
